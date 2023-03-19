@@ -1,4 +1,5 @@
 import React from "react";
+import AuthActionButtons from "./components/AuthActionButtons";
 import FormContainer from "./components/FormContainer";
 import FormHead from "./components/FormHead";
 import TextWithHrLine from "./components/TextWithHrLine";
@@ -10,6 +11,9 @@ const SignIn = (): JSX.Element => {
         title={"Sign In"}
         subtitle={"Welcome back, you’ve been missed!"}
       />
+
+      {/* auth action buttons  */}
+      <AuthActionButtons pageName="Sign In" />
 
       {/* // hr line with text */}
 
