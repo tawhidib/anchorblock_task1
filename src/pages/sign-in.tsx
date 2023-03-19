@@ -14,6 +14,13 @@ const SignIn = (): JSX.Element => {
       {/* // hr line with text */}
 
       <TextWithHrLine text="Or" />
+
+      <button
+        className="w-full py-4 bg-blue capitalize text-white rounded-2xl outline-none  
+      hover:shadow-lg"
+      >
+        sign in
+      </button>
     </FormContainer>
   );
 };
