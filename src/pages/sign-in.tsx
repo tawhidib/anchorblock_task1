@@ -27,7 +27,7 @@ const SignIn = (): JSX.Element => {
       </button>
       <p className="mt-8 text-placeholder text-center">
         Don’t have an account yet?{" "}
-        <span className="capitalize text-blue">sign up</span>
+        <button className="capitalize text-blue">sign up</button>
       </p>
     </FormContainer>
   );
