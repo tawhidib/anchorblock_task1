@@ -21,7 +21,7 @@ const AuthActionButtons = ({
       <div className="flex-1">
         <button className="w-full bg-[#F0F5FA] rounded-lg text-center py-3">
           <div className="flex justify-center items-center">
-            <img src={appleIcon.src} width={25} height={25} />
+            <img src={appleIcon.src} width={20} height={24} />
             <span className="ml-2 text-subTitle">{pageName} with Apple ID</span>
           </div>
         </button>

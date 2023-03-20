@@ -5,7 +5,7 @@ interface FormContainerProps {
 }
 
 const FormContainer = ({ children }: FormContainerProps): JSX.Element => {
-  return <div className="max-w-screen-sm mx-auto px-12">{children}</div>;
+  return <div className="max-w-[576px] mx-auto px-4">{children}</div>;
 };
 
 export default FormContainer;
