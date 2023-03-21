@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import BrandLogo from "./BrandLogo";
-import vector from "../../assets/images/icons/vector.png";
+import vector from "../assets/images/icons/vector.png";
 
 const Navbar = (): JSX.Element => {
   return (
