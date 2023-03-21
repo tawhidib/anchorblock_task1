@@ -18,6 +18,7 @@ module.exports = {
         blue: "#377DFF",
         primary: "#4E5D78",
         secondary: "#A7AFBC",
+        error: "#FF5630",
       },
     },
   },
