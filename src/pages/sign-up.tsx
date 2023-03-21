@@ -42,65 +42,71 @@ const SignUp = () => {
 
       <TextWithHrLine text="or" />
 
-      <form>
+      <form className="mt-6">
         {/* email field  */}
-        <div className="relative py-4">
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <img src={at.src} height={22} width={22} />
+        <div className="mb-7">
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <img src={at.src} height={22} width={22} />
+            </div>
+            <input
+              type="email"
+              className="block w-full p-4 pl-12 text-base text-placeholder border border-[#EDEFF1] rounded-2xl font-medium focus:outline-transparent"
+              placeholder="Your Email"
+              value={signUpFormik.values.email}
+              name="email"
+              onChange={signUpFormik.handleChange}
+              required
+            />
           </div>
-          <input
-            type="email"
-            className="block w-full p-4 pl-12 text-base text-placeholder border border-[#EDEFF1] rounded-2xl font-medium focus:outline-transparent"
-            placeholder="Your Email"
-            value={signUpFormik.values.email}
-            name="email"
-            onChange={signUpFormik.handleChange}
-            required
-          />
         </div>
 
         {/* name field  */}
-        <div className="relative py-4">
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <img src={face.src} height={22} width={22} />
+        <div className="mb-7">
+          <div className="relative py-4">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <img src={face.src} height={22} width={22} />
+            </div>
+            <input
+              type="text"
+              className="block w-full p-4 pl-12 text-base text-placeholder border border-[#EDEFF1] rounded-2xl font-medium focus:outline-transparent"
+              placeholder="Your Name"
+              value={signUpFormik.values.name}
+              name="name"
+              onChange={signUpFormik.handleChange}
+              required
+            />
           </div>
-          <input
-            type="text"
-            className="block w-full p-4 pl-12 text-base text-placeholder border border-[#EDEFF1] rounded-2xl font-medium focus:outline-transparent"
-            placeholder="Your Name"
-            value={signUpFormik.values.name}
-            name="name"
-            onChange={signUpFormik.handleChange}
-            required
-          />
         </div>
 
         {/* password field  */}
-        <div className="relative py-4">
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <img src={locker.src} height={22} width={22} />
+        <div className="mb-7">
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <img src={locker.src} height={22} width={22} />
+            </div>
+            <input
+              type="password"
+              className="block w-full p-4 pl-12 text-base text-placeholder border border-[#EDEFF1] rounded-2xl font-medium focus:outline-transparent"
+              placeholder="Create Password"
+              value={signUpFormik.values.password}
+              name="password"
+              onChange={signUpFormik.handleChange}
+              required
+            />
+            <button
+              type="button"
+              className="absolute inset-y-0 right-0 flex items-center pr-4"
+            >
+              <img src={eye.src} height={20} width={20} />
+            </button>
           </div>
-          <input
-            type="password"
-            className="block w-full p-4 pl-12 text-base text-placeholder border border-[#EDEFF1] rounded-2xl font-medium focus:outline-transparent"
-            placeholder="Create Password"
-            value={signUpFormik.values.password}
-            name="password"
-            onChange={signUpFormik.handleChange}
-            required
-          />
-          <button
-            type="button"
-            className="absolute inset-y-0 right-0 flex items-center pr-4"
-          >
-            <img src={eye.src} height={20} width={20} />
-          </button>
         </div>
 
         {/* checkbox  */}
         <div className="flex items-center mb-4">
           <input
-            id="default-checkbox"
+            id="sign-up-checkbox"
             type="checkbox"
             value={`${signUpFormik.values.checked}`}
             onChange={signUpFormik.handleBlur}
@@ -108,7 +114,7 @@ const SignUp = () => {
             w-[28px] h-[28px] border-none rounded-lg checked:bg-blue outline-none checked:outline-none border-transparent focus:border-transparent focus:ring-transparent"
           />
           <label
-            htmlFor="default-checkbox"
+            htmlFor="sign-up-checkbox"
             className="ml-4 my-3 text-placeholder"
           >
             I agree to the Terms & Conditions
