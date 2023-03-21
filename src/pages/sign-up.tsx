@@ -143,6 +143,19 @@ const SignUp = () => {
               <img src={eye.src} height={20} width={20} />
             </button>
           </div>
+
+          <ul className="mt-4 flex justify-between px-4">
+            {[1, 2, 3, 4, 5].map((bar) => (
+              <li
+                key={bar}
+                className={`h-[5px] w-[68px] ${
+                  signUpFormik.values.password.length < bar
+                    ? "bg-[#F3F3F3]"
+                    : "bg-[#38CB89]"
+                } rounded-full`}
+              ></li>
+            ))}
+          </ul>
         </div>
 
         {/* checkbox  */}
