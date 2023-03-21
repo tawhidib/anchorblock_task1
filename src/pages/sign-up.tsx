@@ -32,9 +32,7 @@ const SignUp = () => {
         .email("Please enter a valid email address.")
         .required("Please provide an email"),
       name: Yup.string().required("Please give your name"),
-      password: Yup.string()
-        .min(5, "Password should be more than 5 character")
-        .required("Please type your password"),
+      password: Yup.string().min(5).required(),
     }),
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
