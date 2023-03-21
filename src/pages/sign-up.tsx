@@ -8,6 +8,7 @@ import at from "../assets/images/icons/at.png";
 import face from "../assets/images/icons/face.png";
 import locker from "../assets/images/icons/locker.png";
 import eye from "../assets/images/icons/eye.png";
+import * as Yup from "yup";
 
 interface signUpFormData {
   email: string;
@@ -26,10 +27,22 @@ const SignUp = () => {
 
   const signUpFormik = useFormik({
     initialValues,
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Please enter a valid email address.")
+        .required("Please provide an email"),
+      name: Yup.string().required("Please give your name"),
+      password: Yup.string()
+        .min(5, "Password should be more than 5 character")
+        .required("Please type your password"),
+    }),
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
     },
   });
+
+  const { errors, touched } = signUpFormik;
+
   return (
     <FormContainer>
       <FormHead
@@ -42,7 +55,11 @@ const SignUp = () => {
 
       <TextWithHrLine text="or" />
 
-      <form className="mt-6">
+      <form
+        className="mt-6"
+        onSubmit={signUpFormik.handleSubmit}
+        autoComplete={"off"}
+      >
         {/* email field  */}
         <div className="mb-7">
           <div className="relative">
@@ -51,31 +68,53 @@ const SignUp = () => {
             </div>
             <input
               type="email"
-              className="block w-full p-4 pl-12 text-base text-placeholder border border-[#EDEFF1] rounded-2xl font-medium focus:outline-transparent"
+              className={`block w-full p-4 pl-12 text-base text-placeholder border  ${
+                errors.email && touched.email
+                  ? "border-error focus:shadow-md"
+                  : "border-[#EDEFF1] focus:shadow-md"
+              } rounded-2xl font-medium focus:outline-transparent `}
               placeholder="Your Email"
               value={signUpFormik.values.email}
               name="email"
               onChange={signUpFormik.handleChange}
+              onBlur={signUpFormik.handleBlur}
               required
             />
+          </div>
+
+          {/* email error message  */}
+
+          <div className="text-sm text-error whitespace-normal mt-2">
+            {errors.email && touched.email ? <>{errors.email}</> : null}
           </div>
         </div>
 
         {/* name field  */}
         <div className="mb-7">
-          <div className="relative py-4">
+          <div className="relative">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <img src={face.src} height={22} width={22} />
             </div>
             <input
               type="text"
-              className="block w-full p-4 pl-12 text-base text-placeholder border border-[#EDEFF1] rounded-2xl font-medium focus:outline-transparent"
-              placeholder="Your Name"
+              className={`block w-full p-4 pl-12 text-base text-placeholder border  ${
+                errors.name && touched.name
+                  ? "border-error focus:shadow-md"
+                  : "border-[#EDEFF1] focus:shadow-md"
+              } rounded-2xl font-medium focus:outline-transparent `}
+              placeholder="Your name"
               value={signUpFormik.values.name}
               name="name"
               onChange={signUpFormik.handleChange}
+              onBlur={signUpFormik.handleBlur}
               required
             />
+          </div>
+
+          {/* email error message  */}
+
+          <div className="text-sm text-error whitespace-normal mt-2">
+            {errors.name && touched.name ? <>{errors.name}</> : null}
           </div>
         </div>
 
@@ -87,11 +126,16 @@ const SignUp = () => {
             </div>
             <input
               type="password"
-              className="block w-full p-4 pl-12 text-base text-placeholder border border-[#EDEFF1] rounded-2xl font-medium focus:outline-transparent"
+              className={`block w-full p-4 pl-12 text-base text-placeholder border  ${
+                errors.password && touched.password
+                  ? "border-error focus:shadow-md"
+                  : "border-[#EDEFF1] focus:shadow-md"
+              } rounded-2xl font-medium focus:outline-transparent `}
               placeholder="Create Password"
               value={signUpFormik.values.password}
               name="password"
               onChange={signUpFormik.handleChange}
+              onBlur={signUpFormik.handleBlur}
               required
             />
             <button
@@ -100,6 +144,14 @@ const SignUp = () => {
             >
               <img src={eye.src} height={20} width={20} />
             </button>
+          </div>
+
+          {/* password error message  */}
+
+          <div className="text-sm text-error whitespace-normal mt-2">
+            {errors.password && touched.password ? (
+              <>{errors.password}</>
+            ) : null}
           </div>
         </div>
 
