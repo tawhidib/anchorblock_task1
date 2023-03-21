@@ -143,14 +143,6 @@ const SignUp = () => {
               <img src={eye.src} height={20} width={20} />
             </button>
           </div>
-
-          {/* password error message  */}
-
-          <div className="text-sm text-error whitespace-normal mt-2">
-            {errors.password && touched.password ? (
-              <>{errors.password}</>
-            ) : null}
-          </div>
         </div>
 
         {/* checkbox  */}
