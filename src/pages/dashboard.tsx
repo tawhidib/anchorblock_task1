@@ -4,5 +4,5 @@ import React from "react";
 const Dashboard = () => {
   return <h3></h3>;
 };
-Dashboard.getLayout = (page) => <Layout>{page}</Layout>;
+Dashboard.getLayout = (page: JSX.Element) => <Layout>{page}</Layout>;
 export default Dashboard;
