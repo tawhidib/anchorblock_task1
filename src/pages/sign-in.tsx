@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AuthActionButtons from "../components/AuthActionButtons";
 import FormContainer from "../components/FormContainer";
 import FormHead from "../components/FormHead";
@@ -9,6 +9,8 @@ import locker from "../assets/images/icons/locker.png";
 import eye from "../assets/images/icons/eye.png";
 import * as Yup from "yup";
 import Navbar from "../components/Navbar";
+import { useRouter } from "next/router";
+import api from "@/lib/api";
 
 interface SignInFormData {
   email: string;
@@ -16,26 +18,15 @@ interface SignInFormData {
   checked: boolean;
 }
 
-// const validate = (values: SignInFormData) => {
-//   const errors: SignInFormData = {
-//     email: "",
-//     password: "",
-//     checked: false,
-//   };
-
-//   if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-//     errors.email = "Please enter a valid email";
-//   }
-
-//   return errors;
-// };
-
 const SignIn = (): JSX.Element => {
+  const [apiError, setApiError] = useState("");
   const initialValues: SignInFormData = {
     email: "",
     password: "",
     checked: false,
   };
+
+  const router = useRouter();
 
   // formik setup
   const signInFormik = useFormik({
@@ -48,12 +39,25 @@ const SignIn = (): JSX.Element => {
       password: Yup.string().required("Please type your password"),
     }),
     onSubmit: (values) => {
-      alert(JSON.stringify(values));
+      api
+        .post("/login", {
+          email: values.email,
+          password: values.password,
+        })
+        .then(({ data, status }) => {
+          if (status === 200) {
+            localStorage.setItem("token", data?.token);
+            router.push("/dashboard");
+          }
+        })
+        .catch((error) => {
+          setApiError(error.response.data.error);
+        });
     },
   });
 
-  const { errors, touched } = signInFormik;
-  console.log(errors.email && touched.email);
+  const { errors, touched, values, handleSubmit } = signInFormik;
+
   return (
     <>
       <Navbar />
@@ -160,6 +164,8 @@ const SignIn = (): JSX.Element => {
             </label>
           </div>
 
+          <div className="text-center text-error my-4">{apiError}</div>
+
           {/* submit button  */}
           <button
             type="submit"
@@ -171,7 +177,12 @@ const SignIn = (): JSX.Element => {
         </form>
         <p className="mt-8 text-placeholder text-center">
           Don’t have an account yet?{" "}
-          <button className="capitalize text-blue">sign up</button>
+          <button
+            onClick={() => router.push("/sign-up")}
+            className="capitalize text-blue"
+          >
+            sign up
+          </button>
         </p>
       </FormContainer>
     </>
