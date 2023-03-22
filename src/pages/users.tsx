@@ -1,7 +1,33 @@
+import React, { useEffect, useState } from "react";
 import Layout from "@/components/layout";
-import React from "react";
+import api from "@/lib/api";
+import more from "../assets/images/icons/more.png";
+
+interface User {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  avatar: string;
+}
 
 const Users = (): JSX.Element => {
+  const [users, setUsers] = useState<User[]>([]);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    api
+      .get(`/users`, {
+        params: {
+          page,
+        },
+      })
+      .then(({ data }) => {
+        setUsers(data.data);
+      });
+  }, [page]);
+
+  console.log(users);
   return (
     <>
       <header>
@@ -15,27 +41,42 @@ const Users = (): JSX.Element => {
           <table className="w-full text-sm text-left text-[#4E5D78]">
             <thead className="text-xs uppercase bg-[#FAFBFC] rounded-3xl min-w-full">
               <tr className="rounded-full min-w-full">
-                <th scope="col" className="w-[10%] px-6 py-3 text-left">
+                <th scope="col" className="w-[10%] px-6 py-3">
                   #ID
                 </th>
-                <th scope="col" className="w-[40%] px-6 py-3 text-left">
+                <th scope="col" className="w-[40%] px-6 py-3">
                   USER
                 </th>
-                <th scope="col" className="w-[40%] px-6 py-3 text-left">
+                <th scope="col" className="w-[40%] px-6 py-3">
                   EMAIL
                 </th>
-                <th scope="col" className="w-[10%] px-6 py-3 text-right">
+                <th scope="col" className="w-[10%] px-6 py-3">
                   OPTION
                 </th>
               </tr>
             </thead>
             <tbody className="text-sm">
-              <tr className="bg-white">
-                <td className="px-6 py-4">Silver</td>
-                <td className="px-6 py-4">Silver</td>
-                <td className="px-6 py-4">Laptop</td>
-                <td className="px-6 py-4 text-right">$2999</td>
-              </tr>
+              {users.map((user) => (
+                <tr className="bg-white">
+                  <td className="px-6 py-4">{user.id}</td>
+                  <td className="px-6 py-4 flex items-center">
+                    <div className="mr-4">
+                      <img
+                        className="w-[60px] h-[60px] rounded-[15px]"
+                        src={user.avatar}
+                        width={60}
+                        height={60}
+                        loading="lazy"
+                      />
+                    </div>
+                    <div>{user.first_name + " " + user.last_name}</div>
+                  </td>
+                  <td className="px-6 py-4">{user?.email}</td>
+                  <td className="px-6 py-4 flex items-center">
+                    <img src={more.src} height={24} width={24} />
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
