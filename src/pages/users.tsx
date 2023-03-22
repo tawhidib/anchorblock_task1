@@ -56,7 +56,7 @@ const Users = (): JSX.Element => {
             </thead>
             <tbody className="text-sm">
               {users.map((user) => (
-                <tr className="bg-white">
+                <tr key={user.email} className="bg-white">
                   <td className="px-6 py-4">{user.id}</td>
                   <td className="px-6 py-4 flex items-center">
                     <div className="mr-4">
