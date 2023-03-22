@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BrandLogo from "./BrandLogo";
 import menu from "../assets/images/icons/menu.png";
 import bell from "../assets/images/icons/bell.png";
@@ -6,6 +6,7 @@ import avatar from "../assets/images/icons/avatar.png";
 import dashboard from "../assets/images/icons/dashboard.png";
 import user from "../assets/images/icons/user.png";
 import invoice from "../assets/images/icons/invoice.png";
+import leftArrow from "../assets/images/icons/left-arrow.png";
 
 interface LayoutProps {
   children: JSX.Element;
@@ -18,11 +19,12 @@ const pages = [
 ];
 
 const Layout = ({ children }: LayoutProps): JSX.Element => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
     <div className="h-[100dvh] w-full relative">
       <div className="flex justify-between items-center p-3">
         <div className="flex items-center flex-shrink min-w-[249px]">
-          <button className="mr-4">
+          <button onClick={() => setIsSidebarOpen(true)} className="mr-4">
             <img src={menu.src} width={25} height={25} />
           </button>
           <BrandLogo />
@@ -31,7 +33,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
           <form className="px-12">
             <label
               htmlFor="default-search"
-              className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+              className="mb-2 text-sm font-medium text-gray-900 sr-only"
             >
               Search
             </label>
@@ -73,8 +75,17 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
         </div>
       </div>
 
-      <div className="w-[249px] h-[100dvh] bg-white absolute z-50 left-0 top-0 px-4 pt-3 border-r border-r-[#F3F3F3]">
-        <BrandLogo />
+      <div
+        className={`w-[249px] h-[100dvh] bg-white absolute z-50 left-0 top-0 px-4 border-r border-r-[#F3F3F3] ${
+          isSidebarOpen ? null : "hidden"
+        }`}
+      >
+        <div className="flex items-center pt-3">
+          <button onClick={() => setIsSidebarOpen(false)} className="mr-4">
+            <img src={leftArrow.src} width={25} height={25} />
+          </button>
+          <BrandLogo />
+        </div>
 
         <div className="mt-10">
           <h6 className="uppercase text-placeholder text-xs font-medium">
@@ -96,7 +107,9 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
         </div>
       </div>
 
-      <div className="container px-4">{children}</div>
+      <div className="container px-4 mx-auto mt-4 md:ml-[250px]">
+        <div className="md:ml-12">{children}</div>
+      </div>
     </div>
   );
 };
