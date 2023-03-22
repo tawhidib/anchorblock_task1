@@ -164,6 +164,7 @@ const SignIn = (): JSX.Element => {
             </label>
           </div>
 
+          {/* error after api call  */}
           <div className="text-center text-error my-4">{apiError}</div>
 
           {/* submit button  */}
