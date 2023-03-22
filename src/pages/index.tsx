@@ -2,10 +2,12 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import Navbar from "../components/Navbar";
+import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -16,6 +18,32 @@ export default function Home() {
       </Head>
       <main>
         <Navbar />
+        <div className="h-[90vh] flex flex-col justify-center items-center">
+          <button
+            className="text-xl text-blue hover:underline"
+            onClick={() => router.push("/dashboard")}
+          >
+            Dashboard
+          </button>
+          <button
+            className="text-xl text-blue hover:underline"
+            onClick={() => router.push("/users")}
+          >
+            Users
+          </button>
+          <button
+            className="text-xl text-blue hover:underline"
+            onClick={() => router.push("/sign-in")}
+          >
+            Sign In
+          </button>
+          <button
+            className="text-xl text-blue hover:underline"
+            onClick={() => router.push("/sign-up")}
+          >
+            Sign Up
+          </button>
+        </div>
       </main>
     </>
   );
