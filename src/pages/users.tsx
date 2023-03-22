@@ -19,7 +19,7 @@ const Users = (): JSX.Element => {
     api
       .get(`/users`, {
         params: {
-          page,
+          page: page,
         },
       })
       .then(({ data }) => {
@@ -79,6 +79,46 @@ const Users = (): JSX.Element => {
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* pagination  */}
+        <div className="flex">
+          <button
+            className="w-[32px] h-[32px] bg-white hover:bg-[#2F80ED] border-[#F1F1F1] border rounded-xl text-[#333333] text-[13px] font-semibold ml-2"
+            onClick={() => setPage(1)}
+          >
+            {"<<"}
+          </button>
+          <button className="w-[32px] h-[32px] bg-white hover:bg-[#2F80ED] border-[#F1F1F1] border rounded-xl text-[#333333] text-[13px] font-semibold ml-2">
+            {"<"}
+          </button>
+          <button
+            className="w-[32px] h-[32px] bg-[#2F80ED]  border-[#F1F1F1] border rounded-xl text-white text-[13px] font-semibold ml-2"
+            disabled
+          >
+            {page}
+          </button>
+          <button className="w-[32px] h-[32px] bg-white hover:bg-[#2F80ED] border-[#F1F1F1] border rounded-xl text-[#333333] text-[13px] font-semibold ml-2" onClick={() => setPage(pre => pre + 1)}>
+            {page + 1}
+          </button>
+          <button className="w-[32px] h-[32px] bg-white hover:bg-[#2F80ED] border-[#F1F1F1] border rounded-xl text-[#333333] text-[13px] font-semibold ml-2" onClick={() => setPage(pre => pre + 2)}>
+            {page + 2}
+          </button>
+          <button
+            className="w-[32px] h-[32px] bg-white hover:bg-[#2F80ED] border-[#F1F1F1] border rounded-xl text-[#333333] text-[13px] font-semibold ml-2"
+            disabled
+          >
+            {"..."}
+          </button>
+          <button className="w-[32px] h-[32px] bg-white hover:bg-[#2F80ED] border-[#F1F1F1] border rounded-xl text-[#333333] text-[13px] font-semibold ml-2"  onClick={() => setPage(pre => pre + 9)}>
+            {page + 9}
+          </button>
+          <button className="w-[32px] h-[32px] bg-white hover:bg-[#2F80ED] border-[#F1F1F1] border rounded-xl text-[#333333] text-[13px] font-semibold ml-2"  onClick={() => setPage(pre => pre + 1)}>
+            {">"}
+          </button>
+          <button className="w-[32px] h-[32px] bg-white hover:bg-[#2F80ED] border-[#F1F1F1] border rounded-xl text-[#333333] text-[13px] font-semibold ml-2"  onClick={() => setPage(pre => pre + 10)}>
+            {">>"}
+          </button>
         </div>
       </main>
     </>
