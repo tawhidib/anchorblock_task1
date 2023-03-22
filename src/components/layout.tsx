@@ -7,19 +7,21 @@ import dashboard from "../assets/images/icons/dashboard.png";
 import user from "../assets/images/icons/user.png";
 import invoice from "../assets/images/icons/invoice.png";
 import leftArrow from "../assets/images/icons/left-arrow.png";
+import { useRouter } from "next/router";
 
 interface LayoutProps {
   children: JSX.Element;
 }
 
 const pages = [
-  { name: "dashboard", icon: dashboard },
-  { name: "users", icon: user },
-  { name: "sales", icon: invoice },
+  { name: "dashboard", icon: dashboard, route: "/dashboard" },
+  { name: "users", icon: user, route: "/users" },
+  { name: "sales", icon: invoice, route: "/sales" },
 ];
 
 const Layout = ({ children }: LayoutProps): JSX.Element => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const { pathname, push } = useRouter();
   return (
     <div className="h-[100dvh] w-full relative">
       <div className="flex justify-between items-center p-3">
@@ -94,13 +96,20 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
 
           {/* page links  */}
 
-          <ul className="flex flex-col">
+          <ul className="">
             {pages.map((page) => (
-              <li className="my-1 p-3 rounded-xl text-[#A7AFBC] font-medium text-xs flex justify-start items-center bg-white hover:bg-[#F0F5FA] cursor-pointer capitalize">
-                <span className="mr-4">
-                  <img src={page.icon.src} width={16} height={16} />
-                </span>
-                {page.name}
+              <li className="my-1" onClick={() => push(page.route)}>
+                <div
+                  className={`
+                  "my-2 p-3 rounded-xl text-[#A7AFBC] font-medium text-xs flex justify-start items-center hover:bg-[#F0F5FA] cursor-pointer capitalize ${
+                    pathname === page.route ? "bg-[#F0F5FA]" : "bg-white"
+                  }`}
+                >
+                  <span className="mr-4">
+                    <img src={page.icon.src} width={16} height={16} />
+                  </span>
+                  {page.name}
+                </div>
               </li>
             ))}
           </ul>
