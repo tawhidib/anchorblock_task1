@@ -1,15 +1,15 @@
 import React from "react";
-import AuthActionButtons from "./components/AuthActionButtons";
-import FormContainer from "./components/FormContainer";
-import FormHead from "./components/FormHead";
-import TextWithHrLine from "./components/TextWithHrLine";
+import AuthActionButtons from "../components/AuthActionButtons";
+import FormContainer from "../components/FormContainer";
+import FormHead from "../components/FormHead";
+import TextWithHrLine from "../components/TextWithHrLine";
 import { useFormik } from "formik";
 import at from "../assets/images/icons/at.png";
 import face from "../assets/images/icons/face.png";
 import locker from "../assets/images/icons/locker.png";
 import eye from "../assets/images/icons/eye.png";
 import * as Yup from "yup";
-import Navbar from "./components/Navbar";
+import Navbar from "../components/Navbar";
 
 interface signUpFormData {
   email: string;

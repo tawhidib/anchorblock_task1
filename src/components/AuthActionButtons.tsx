@@ -1,6 +1,6 @@
 import React from "react";
-import googleIcon from "../../assets/images/icons/google.png";
-import appleIcon from "../../assets/images/icons/apple.png";
+import googleIcon from "../assets/images/icons/google.png";
+import appleIcon from "../assets/images/icons/apple.png";
 interface AuthActionButtonsProps {
   pageName: string;
 }
