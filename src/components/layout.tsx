@@ -116,6 +116,13 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
                 </div>
               </li>
             ))}
+
+            <li
+              className="text-blue hover:underline cursor-pointer"
+              onClick={() => push("/")}
+            >
+              go to home
+            </li>
           </ul>
         </div>
       </div>
