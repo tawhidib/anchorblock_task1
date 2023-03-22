@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AuthActionButtons from "../components/AuthActionButtons";
 import FormContainer from "../components/FormContainer";
 import FormHead from "../components/FormHead";
@@ -10,6 +10,8 @@ import locker from "../assets/images/icons/locker.png";
 import eye from "../assets/images/icons/eye.png";
 import * as Yup from "yup";
 import Navbar from "../components/Navbar";
+import { useRouter } from "next/router";
+import api from "@/lib/api";
 
 interface signUpFormData {
   email: string;
@@ -19,6 +21,8 @@ interface signUpFormData {
 }
 
 const SignUp = () => {
+  const [apiError, setApiError] = useState("");
+
   const initialValues: signUpFormData = {
     email: "",
     name: "",
@@ -36,12 +40,25 @@ const SignUp = () => {
       password: Yup.string().min(5).required(),
     }),
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      api
+        .post("/register", {
+          email: values.email,
+          password: values.password,
+        })
+        .then(({ data, status }) => {
+          if (status === 200) {
+            localStorage.setItem("token", data?.token);
+            router.push("/dashboard");
+          }
+        })
+        .catch((error) => {
+          setApiError(error.response.data.error);
+        });
     },
   });
 
   const { errors, touched } = signUpFormik;
-
+  const router = useRouter();
   return (
     <>
       <Navbar />
@@ -179,17 +196,26 @@ const SignUp = () => {
               I agree to the Terms & Conditions
             </label>
           </div>
+
+          {/* error after api call  */}
+          <div className="text-center text-error my-4">{apiError}</div>
+
+          <button
+            type="submit"
+            className="w-full py-4 bg-blue capitalize text-white rounded-2xl outline-none hover:shadow-lg"
+          >
+            sign up
+          </button>
         </form>
 
-        <button
-          className="w-full py-4 bg-blue capitalize text-white rounded-2xl outline-none  
-      hover:shadow-lg"
-        >
-          sign up
-        </button>
         <p className="mt-8 text-placeholder text-center">
           Already have an account?{" "}
-          <button className="capitalize text-blue">sign in</button>
+          <button
+            onClick={() => router.push("/sign-in")}
+            className="capitalize text-blue"
+          >
+            sign in
+          </button>
         </p>
       </FormContainer>
     </>
