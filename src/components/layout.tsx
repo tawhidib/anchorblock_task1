@@ -51,8 +51,8 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
                 >
                   <path
                     strokeLinecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                   ></path>
                 </svg>
@@ -98,7 +98,11 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
 
           <ul className="">
             {pages.map((page) => (
-              <li className="my-1" onClick={() => push(page.route)}>
+              <li
+                key={page.name}
+                className="my-1"
+                onClick={() => push(page.route)}
+              >
                 <div
                   className={`
                   "my-2 p-3 rounded-xl text-[#A7AFBC] font-medium text-xs flex justify-start items-center hover:bg-[#F0F5FA] cursor-pointer capitalize ${
